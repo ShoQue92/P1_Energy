@@ -59,18 +59,17 @@ def drop_tables():
 def insert_record(table, columns, values):
     match table:
         case "meterkast_metingen":
-            print('meterkast')
+            #print('meterkast')
             sql_statement = 'INSERT INTO ' + table + ' ( ' + ', '.join(str(v) for v in columns) + ' ) ' + 'VALUES' + ' ( ' + ', '.join('\'' + str(v) + '\'' for v in values) + ' ) '
-            #print(sql_statement)
             c.execute( sql_statement)
             conn.commit()
         case "kantoor_metingen":
-            print('kantoor')
+            #print('kantoor')
             sql_statement = 'INSERT INTO ' + table + ' ( ' + ', '.join(str(v) for v in columns) + ' ) ' + 'VALUES' + ' ( ' + ', '.join('\'' + str(v) + '\'' for v in values) + ' ) '
             c.execute( sql_statement)
             conn.commit()
         case "woonkamer_metingen":
-            print('woonkamer')
+            #print('woonkamer')
             sql_statement = 'INSERT INTO ' + table + ' ( ' + ', '.join(str(v) for v in columns) + ' ) ' + 'VALUES' + ' ( ' + ', '.join('\'' + str(v) + '\'' for v in values) + ' ) '
             #print(sql_statement)
             c.execute( sql_statement)

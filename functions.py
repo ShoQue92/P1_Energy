@@ -1,5 +1,6 @@
 from datetime import datetime
 import requests
+import time 
 
 def opvragen_data(IP):
     URL = 'http://'+IP+'/api/v1/data'
@@ -9,6 +10,7 @@ def opvragen_data(IP):
     #Ophalen huidige timestamp en toevoegen als element in de dictionary
     current_timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     base_result.update({'timestamp': current_timestamp })
+    time.sleep(1)
     return base_result
 
 def str_naar_dt(string, format):
@@ -22,7 +24,7 @@ def list_to_dict_convert(tuple):
     di = dict(tuple)
     return di
 
-def meter_naam_via_IP(IP):
+def tabel_naam_via_IP(IP):
     meters = {
         "meterkast_metingen" : "192.168.1.211",
         "kantoor_metingen" : "192.168.1.76",
@@ -30,3 +32,21 @@ def meter_naam_via_IP(IP):
     }
     tabel_naam =  [key for key ,value  in meters.items() if value == IP]
     return tabel_naam[0]
+
+def meter_IP_via_naam(naam):
+    meters = {
+        "meterkast" : "192.168.1.211",
+        "kantoor" : "192.168.1.76",
+        "woonkamer" : "192.168.1.206"
+    }
+    IP =  [value for key ,value  in meters.items() if key == naam]
+    return IP[0]
+
+def meter_naam_via_IP(IP):
+    meters = {
+        "meterkast" : "192.168.1.211",
+        "kantoor" : "192.168.1.76",
+        "woonkamer" : "192.168.1.206"
+    }
+    naam =  [key for key ,value  in meters.items() if value == IP]
+    return naam[0]
