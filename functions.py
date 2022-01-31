@@ -77,6 +77,3 @@ def interval_meting(naam,IP, interval=60):
         print_string = ' Meting iteratie ' + str(i) + ' voor ' + naam + ' '
         print(print_string.center(100,'='))
         i +=1
- 
-dataset = opvragen_data('192.168.1.211')
-influx_loggen(dataset)
