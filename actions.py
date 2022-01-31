@@ -5,22 +5,37 @@ from functions import list_to_dict_convert
 from functions import tabel_naam_via_IP
 from functions import meter_IP_via_naam
 from functions import meter_naam_via_IP
+from functions import handmatige_meting
+from functions import interval_meting
 from db_sdk import create_tables
 from db_sdk import drop_tables
 from db_sdk import insert_record
 from datetime import datetime
+from sys import argv
 
-IP = '192.168.1.206'
+create_tables()
 
-def starten_meting(naam,duur):
-    print('Starten meting voor ' + meter_naam_via_IP(IP) + ' op ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + 'voor de duur van ' + str(duur) + ' seconden')
-    i = 0
-    while True:
-        data = opvragen_data(IP)
-        insert_record(tabel_naam_via_IP(IP), list(data.keys()), list(data.values()))
-        i +=1
-        print(i)
-        if i == duur:
-            break
+commands = {
+       "handmatige_meting": handmatige_meting,
+       "interval_meting": interval_meting
+}
 
-starten_meting('meterkast',60)
+# bestandsnaam negeren
+argv.pop(0)
+
+if not argv:
+       print("Geen commando meegegeven!")
+       exit(1)
+
+# eerste cmd argument is altijd de command
+received_command = argv.pop(0)
+# match command naar functie met de dictionary, bestaat deze niet dan krijgen we None terug
+matched_command = commands.get(received_command)
+
+#check of command bestaat, als dat het geval is roep deze aan met de rest van de argumenten
+if not matched_command:
+       print("Geen geldig commando gevonden.")
+       exit(1)
+
+matched_command(*argv)
+exit(0)
