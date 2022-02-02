@@ -1,0 +1,5 @@
+sudo docker build -t p1_influx .
+
+sudo docker run -d --name p1_meterkast_influx -v /volume1/docker/p1_energy_influx:/home/p1_energy -e DEVICE_IP=192.168.1.211 -e DEVICE_BRON=meterkast --network=host p1_influx
+sudo docker run -d --name p1_woonkamer_influx -v /volume1/docker/p1_energy_influx:/home/p1_energy -e DEVICE_IP=192.168.1.204 -e DEVICE_BRON=woonkamer --network=host p1_influx
+sudo docker run -d --name p1_kantoor_influx -v /volume1/docker/p1_energy_influx:/home/p1_energy -e DEVICE_IP=192.168.1.74 -e DEVICE_BRON=kantoor --network=host p1_influx

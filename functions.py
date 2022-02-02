@@ -22,10 +22,25 @@ def main():
     print('Meting gestart!')
     i = 1
     while True:
-        data = opvragen_data(IP) 
-        print('Meting','[',i,']','@', '[',data['timestamp'],']:', '--> active_power_w:',data['active_power_w'], ', active_power_l1_w:', data['active_power_l1_w'], ', total_gas_m3: ', data['total_gas_m3'])
-        influx_point(BRON, data)
-        print('Meting','[',i,']','succesvol gelogd in Influx!')
-        i += 1
+        match BRON:
+            case 'meterkast':
+                data = opvragen_data(IP) 
+                print(BRON, 'meting', '[',i,']', '@', '[',data['timestamp'],']:', '--> active_power_w:',data['active_power_w'], ', active_power_l1_w:', data['active_power_l1_w'], ', total_gas_m3: ', data['total_gas_m3'])
+                influx_point(BRON, data)
+                print('Meting','[',i,']','succesvol gelogd in Influx!')
+                i += 1
 
+            case 'woonkamer':
+                data = opvragen_data(IP) 
+                print(BRON, 'meting', '[', i,']', '@', '[', data['timestamp'],']:', '--> active_power_w:',data['active_power_w'], ', active_power_l1_w:', data['active_power_l1_w'])
+                influx_point(BRON, data)
+                print('Meting', '[', i, ']','succesvol gelogd in Influx!')
+                i += 1
+
+            case 'kantoor':
+                data = opvragen_data(IP) 
+                print(BRON, 'meting', '[', i,']', '@', '[', data['timestamp'],']:', '--> active_power_w:',data['active_power_w'], ', active_power_l1_w:', data['active_power_l1_w'])
+                influx_point(BRON, data)
+                print('Meting', '[', i, ']','succesvol gelogd in Influx!')
+                i += 1
 main()
