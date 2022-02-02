@@ -12,7 +12,7 @@ client = InfluxDBClient(url=URL, token=token)
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
 def influx_point(bron,data):
-
+    
     point = Point(bron)\
     .tag("host", data['meter_model'])\
     .field("active_power_w", data['active_power_w'])\
