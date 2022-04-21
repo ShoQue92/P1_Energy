@@ -16,44 +16,44 @@ def influx_point(bron,data):
         case 'meterkast':
             point = Point(bron)\
             .tag("host", data['meter_model'])\
-            .field("active_power_w", data['active_power_w'])\
+            .field("active_power_w", float(data['active_power_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
 
             point = Point(bron)\
             .tag("host", data['meter_model'])\
-            .field("active_power_l1_w", data['active_power_l1_w'])\
+            .field("active_power_l1_w", float(data['active_power_l1_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
 
             point = Point(bron)\
             .tag("host", data['meter_model'])\
-            .field("total_gas_m3", data['total_gas_m3'])\
+            .field("total_gas_m3", float(data['total_gas_m3']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
 
         case 'woonkamer':
             point = Point(bron)\
             .tag("host", bron)\
-            .field("active_power_w", data['active_power_w'])\
+            .field("active_power_w", float(data['active_power_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
 
             point = Point(bron)\
             .tag("host", bron)\
-            .field("active_power_l1_w", data['active_power_l1_w'])\
+            .field("active_power_l1_w", float(data['active_power_l1_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
         
         case 'kantoor':
             point = Point(bron)\
             .tag("host", bron)\
-            .field("active_power_w", data['active_power_w'])\
+            .field("active_power_w", float(data['active_power_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
 
             point = Point(bron)\
             .tag("host", bron)\
-            .field("active_power_l1_w", data['active_power_l1_w'])\
+            .field("active_power_l1_w", float(data['active_power_l1_w']))\
             .time(datetime.utcnow(), WritePrecision.NS)
             write_api.write(bucket, org, point)
